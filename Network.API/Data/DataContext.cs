@@ -16,5 +16,6 @@ namespace Network.API.Data
 
         public DbSet<ValueData> ValueDatas { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Photo> Photos { get; set; }
     }
 }

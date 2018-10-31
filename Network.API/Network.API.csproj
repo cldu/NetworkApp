@@ -5,10 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20181030194357_AddedPhotoAsAModelAndAdditionalUserFields.cs" />
+    <Compile Remove="Migrations\20181030194357_AddedPhotoAsAModelAndAdditionalUserFields.Designer.cs" />
+    <Compile Remove="Migrations\20181030202038_AddedPhotoAsAModelAndAdditionalUserFields.cs" />
+    <Compile Remove="Migrations\20181030202038_AddedPhotoAsAModelAndAdditionalUserFields.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.4">
