@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Network.API.Data;
 using Network.API.Dtos;
 using Network.API.Models;
+using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Network.API.Controllers
@@ -40,6 +42,22 @@ namespace Network.API.Controllers
             var user = _mapper.Map<UserDetailsDto>(dbUser);
 
             return Ok(user);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(int id, UserUpdateDto userUpdateDto)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var dbUser = await _repository.GetUser(id);
+
+            _mapper.Map(userUpdateDto, dbUser);
+
+            if (await _repository.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating user with {id} failed on save.");
         }
     }
 }
