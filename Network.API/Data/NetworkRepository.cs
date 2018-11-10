@@ -25,11 +25,23 @@ namespace Network.API.Data
             _context.Remove(entity);
         }
 
+        public async Task<Photo> GetPhoto(int id)
+        {
+            var dbPhoto = await _context.Photos.SingleOrDefaultAsync(p => p.Id == id);
+
+            return dbPhoto;
+        }
+
         public async Task<User> GetUser(int id)
         {
             var dbUser = await _context.Users.Include(p => p.Photos).SingleOrDefaultAsync(u => u.Id == id);
 
             return dbUser;
+        }
+
+        public async Task<Photo> GetUserProfilePhoto(int userId)
+        {
+            return await _context.Photos.SingleOrDefaultAsync(p => p.UserId == userId && p.IsProfilePhoto == true);
         }
 
         public async Task<IEnumerable<User>> GetUsers()
