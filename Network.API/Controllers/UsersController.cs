@@ -35,7 +35,7 @@ namespace Network.API.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
             var dbUser = await _repository.GetUser(id);

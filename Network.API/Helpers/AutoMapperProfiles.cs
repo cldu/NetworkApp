@@ -33,6 +33,7 @@ namespace Network.API.Helpers
             CreateMap<Photo, PhotoDetailsDto>();
             CreateMap<PhotoCreationDto, Photo>();
             CreateMap<UserUpdateDto, User>();
+            CreateMap<UserRegisterDto, User>();
         }
     }
 }
