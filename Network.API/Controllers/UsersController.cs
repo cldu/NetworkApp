@@ -8,12 +8,14 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Network.API.Helpers;
 
 namespace Network.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
+    [ServiceFilter(typeof(LogUserActivity))]
     public class UsersController : ControllerBase
     {
         private readonly INetworkRepository _repository;
