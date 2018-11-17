@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Network.API.Helpers;
 using Network.API.Models;
 
 namespace Network.API.Data
@@ -44,11 +45,30 @@ namespace Network.API.Data
             return await _context.Photos.SingleOrDefaultAsync(p => p.UserId == userId && p.IsProfilePhoto == true);
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var dbUsers = await _context.Users.Include(p => p.Photos).ToListAsync();
+            var dbUsers = _context.Users.Include(p => p.Photos).Where(u => u.Id != userParams.UserId).OrderByDescending(u => u.LastActive).AsQueryable();
 
-            return dbUsers;
+            if(!string.IsNullOrEmpty(userParams.Gender))
+                dbUsers = dbUsers.Where(u => u.Gender == userParams.Gender);
+
+            if(userParams.MinAge != 1 || userParams.MaxAge != 99)
+            {
+                var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
+                var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
+
+                dbUsers = dbUsers.Where(x => x.DateOfBirth >= minDob && x.DateOfBirth <= maxDob);
+            }
+
+            if (!string.IsNullOrEmpty(userParams.OrderBy))
+            {
+                if (userParams.OrderBy == "created")
+                    dbUsers = dbUsers.OrderByDescending(u => u.Created);
+                else
+                    dbUsers = dbUsers.OrderByDescending(u => u.LastActive);
+            }
+
+            return await PagedList<User>.CreateAsync(dbUsers, userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<bool> SaveAll()

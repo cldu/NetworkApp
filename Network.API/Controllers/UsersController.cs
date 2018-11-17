@@ -28,11 +28,17 @@ namespace Network.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams)
         {
-            var dbUsers = await _repository.GetUsers();
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var currentUser = await _repository.GetUser(currentUserId);
+            userParams.UserId = currentUserId;
+            
+            var dbUsers = await _repository.GetUsers(userParams);
 
             var users = _mapper.Map<IEnumerable<UserListDto>>(dbUsers);
+
+            Response.AddPagination(dbUsers.PageNumber, dbUsers.PageSize, dbUsers.TotalCount, dbUsers.TotalPages);
 
             return Ok(users);
         }
