@@ -35,5 +35,9 @@ namespace Network.API.Models
 
         public ICollection<Photo> Photos { get; set; }
 
+        public ICollection<Friend> Frienders { get; set; }
+
+        public ICollection<Friend> Friendees { get; set; }
+
     }
 }

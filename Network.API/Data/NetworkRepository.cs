@@ -25,7 +25,7 @@ namespace Network.API.Data
         {
             _context.Remove(entity);
         }
-
+        
         public async Task<Photo> GetPhoto(int id)
         {
             var dbPhoto = await _context.Photos.SingleOrDefaultAsync(p => p.Id == id);
@@ -45,12 +45,29 @@ namespace Network.API.Data
             return await _context.Photos.SingleOrDefaultAsync(p => p.UserId == userId && p.IsProfilePhoto == true);
         }
 
+        public async Task<Friend> GetFriend(int userId, int friendId)
+        {
+            return await _context.Friends.SingleOrDefaultAsync(x => x.FrienderId == userId && x.FriendeeId == friendId);
+        }
+
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
             var dbUsers = _context.Users.Include(p => p.Photos).Where(u => u.Id != userParams.UserId).OrderByDescending(u => u.LastActive).AsQueryable();
 
             if(!string.IsNullOrEmpty(userParams.Gender))
                 dbUsers = dbUsers.Where(u => u.Gender == userParams.Gender);
+
+            if (userParams.Friendees)
+            {
+                var userFriendees = await GetUserFriends(userParams.UserId, userParams.Friendees);
+                dbUsers = dbUsers.Where(x => userFriendees.Contains(x.Id));
+            }
+
+            if (userParams.Frienders)
+            {
+                var userFrienders = await GetUserFriends(userParams.UserId, userParams.Friendees);
+                dbUsers = dbUsers.Where(x => userFrienders.Contains(x.Id));
+            }
 
             if(userParams.MinAge != 1 || userParams.MaxAge != 99)
             {
@@ -74,6 +91,20 @@ namespace Network.API.Data
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        private async Task<IEnumerable<int>> GetUserFriends(int id, bool friendees)
+        {
+            var currentUser = await _context.Users.Include(u => u.Friendees).Include(u => u.Frienders).SingleOrDefaultAsync(u => u.Id == id);
+
+            if (friendees)
+            {
+                return currentUser.Friendees.Where(f => f.FrienderId == id).Select(i => i.FriendeeId);
+            }
+            else
+            {
+                return currentUser.Frienders.Where(f => f.FriendeeId == id).Select(i => i.FrienderId);
+            }
         }
     }
 }

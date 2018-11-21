@@ -28,5 +28,9 @@ namespace Network.API.Helpers
 
         public string OrderBy { get; set; }
 
+        public bool Friendees { get; set; } = false;
+
+        public bool Frienders { get; set; } = false;
+
     }
 }

@@ -67,5 +67,33 @@ namespace Network.API.Controllers
 
             throw new Exception($"Updating user with {id} failed on save.");
         }
+
+        [HttpPost("{id}/friend/{friendId}")]
+        public async Task<IActionResult> BefriendUser(int id, int friendId)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var friend = await _repository.GetFriend(id, friendId);
+
+            if (friend != null)
+                return BadRequest("User is already a friend.");
+
+            if (await _repository.GetUser(friendId) == null)
+                return NotFound();
+
+            friend = new Friend
+            {
+                FrienderId = id,
+                FriendeeId = friendId
+            };
+
+            _repository.Add(friend);
+
+            if (await _repository.SaveAll())
+                return Ok();
+
+            return BadRequest("Failed to add a friend");
+        }
     }
 }

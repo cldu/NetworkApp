@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Network.API.Data;
 
 namespace Network.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20181119190822_AddedFriendEntity")]
+    partial class AddedFriendEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,7 +109,7 @@ namespace Network.API.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Network.API.Models.User", "Friender")
-                        .WithMany("Friendees")
+                        .WithMany("Frienees")
                         .HasForeignKey("FrienderId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });

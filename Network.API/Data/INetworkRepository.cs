@@ -22,5 +22,7 @@ namespace Network.API.Data
         Task<Photo> GetPhoto(int id);
 
         Task<Photo> GetUserProfilePhoto(int userId);
+
+        Task<Friend> GetFriend(int userId, int friendId);
     }
 }
