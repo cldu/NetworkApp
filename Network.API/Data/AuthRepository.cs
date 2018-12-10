@@ -18,13 +18,11 @@ namespace Network.API.Data
 
         public async Task<User> Login(string username, string password)
         {
-            var user = await _context.Users.Include(p => p.Photos).SingleOrDefaultAsync(u => u.Username == username);
+            var user = await _context.Users.Include(p => p.Photos).SingleOrDefaultAsync(u => u.UserName == username);
 
             if (user == null)
                 return null;
 
-            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-                return null;
 
             return user;
         }
@@ -51,8 +49,6 @@ namespace Network.API.Data
             byte[] passwordSalt;
 
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
@@ -71,7 +67,7 @@ namespace Network.API.Data
 
         public async Task<bool> UserExists(string username)
         {
-            if (await _context.Users.AnyAsync(u => u.Username == username))
+            if (await _context.Users.AnyAsync(u => u.UserName == username))
                 return true;
 
             return false;
