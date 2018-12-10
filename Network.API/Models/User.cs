@@ -1,20 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Network.API.Models
 {
-    public class User
+    public class User : IdentityUser<int>
     {
-        public int Id { get; set; }
-
-        public string Username { get; set; }
-
-        public byte[] PasswordHash { get; set; }
-
-        public byte[] PasswordSalt { get; set; }
-
         public string Gender { get; set; }
 
         public DateTime DateOfBirth { get; set; }
@@ -38,6 +31,8 @@ namespace Network.API.Models
         public ICollection<Friend> Frienders { get; set; }
 
         public ICollection<Friend> Friendees { get; set; }
+
+        public ICollection<UserRole> UserRoles { get; set; }
 
     }
 }

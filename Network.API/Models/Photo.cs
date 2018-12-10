@@ -10,6 +10,7 @@ namespace Network.API.Models
         public DateTime DateAdded{ get; set; }
         public bool IsProfilePhoto { get; set; }
         public string PublicId { get; set; }
+        public bool IsApproved { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
 
