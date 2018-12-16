@@ -17,6 +17,8 @@ namespace Network.API.Dtos
 
         public bool IsProfilePhoto { get; set; }
 
+        public bool IsApproved { get; set; }
+
         public string PublicId { get; set; }
     }
 }

@@ -106,6 +106,8 @@ namespace Network.API.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<bool>("IsApproved");
+
                     b.Property<bool>("IsProfilePhoto");
 
                     b.Property<string>("PublicId");

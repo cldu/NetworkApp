@@ -28,14 +28,19 @@ namespace Network.API.Data
         
         public async Task<Photo> GetPhoto(int id)
         {
-            var dbPhoto = await _context.Photos.SingleOrDefaultAsync(p => p.Id == id);
+            var dbPhoto = await _context.Photos.IgnoreQueryFilters().SingleOrDefaultAsync(p => p.Id == id);
 
             return dbPhoto;
         }
 
-        public async Task<User> GetUser(int id)
+        public async Task<User> GetUser(int id, bool isCurrentUser)
         {
-            var dbUser = await _context.Users.Include(p => p.Photos).SingleOrDefaultAsync(u => u.Id == id);
+            var query = _context.Users.Include(p => p.Photos).AsQueryable();
+
+            if (isCurrentUser)
+                query = query.IgnoreQueryFilters();
+
+            var dbUser = await query.SingleOrDefaultAsync(u => u.Id == id);
 
             return dbUser;
         }

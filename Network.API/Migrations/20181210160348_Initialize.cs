@@ -198,6 +198,7 @@ namespace Network.API.Migrations
                     DateAdded = table.Column<DateTime>(nullable: false),
                     IsProfilePhoto = table.Column<bool>(nullable: false),
                     PublicId = table.Column<string>(nullable: true),
+                    IsApproved = table.Column<bool>(nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

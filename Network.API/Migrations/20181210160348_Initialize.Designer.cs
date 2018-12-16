@@ -9,7 +9,7 @@ using Network.API.Data;
 namespace Network.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181125155755_Initialize")]
+    [Migration("20181210160348_Initialize")]
     partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,6 +107,8 @@ namespace Network.API.Migrations
                     b.Property<DateTime>("DateAdded");
 
                     b.Property<string>("Description");
+
+                    b.Property<bool>("IsApproved");
 
                     b.Property<bool>("IsProfilePhoto");
 

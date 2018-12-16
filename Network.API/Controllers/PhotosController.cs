@@ -53,7 +53,7 @@ namespace Network.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var dbUser = await _repository.GetUser(userId);
+            var dbUser = await _repository.GetUser(userId, true);
 
             var file = photoCreationDto.File;
 
@@ -99,7 +99,7 @@ namespace Network.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var dbUser = await _repository.GetUser(userId);
+            var dbUser = await _repository.GetUser(userId, true);
 
             if (!dbUser.Photos.Any(p => p.Id == id))
                 return Unauthorized();
@@ -128,7 +128,7 @@ namespace Network.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var dbUser = await _repository.GetUser(userId);
+            var dbUser = await _repository.GetUser(userId, true);
 
             if (!dbUser.Photos.Any(p => p.Id == photoId))
                 return Unauthorized();

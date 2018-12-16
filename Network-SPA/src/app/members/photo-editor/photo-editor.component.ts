@@ -50,7 +50,8 @@ export class PhotoEditorComponent implements OnInit {
           url: res.url,
           dateAdded: res.dateAdded,
           description: res.description,
-          isProfilePhoto: res.isProfilePhoto
+          isProfilePhoto: res.isProfilePhoto,
+          isApproved: res.isApproved
         };
         this.photos.push(photo);
         if (photo.isProfilePhoto) {

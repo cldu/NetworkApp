@@ -18,7 +18,7 @@ namespace Network.API.Helpers
             var userId = int.Parse(resultContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
             var repository = resultContext.HttpContext.RequestServices.GetService<INetworkRepository>();
-            var user = await repository.GetUser(userId);
+            var user = await repository.GetUser(userId, true);
             user.LastActive = DateTime.Now;
             await repository.SaveAll();
         }

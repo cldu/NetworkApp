@@ -30,7 +30,7 @@ namespace Network.API.Controllers
         public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams)
         {
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var currentUser = await _repository.GetUser(currentUserId);
+            var currentUser = await _repository.GetUser(currentUserId, false);
             userParams.UserId = currentUserId;
             
             var dbUsers = await _repository.GetUsers(userParams);
@@ -45,7 +45,8 @@ namespace Network.API.Controllers
         [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
-            var dbUser = await _repository.GetUser(id);
+            var isCurrentUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) == id;
+            var dbUser = await _repository.GetUser(id, isCurrentUser);
             var user = _mapper.Map<UserDetailsDto>(dbUser);
 
             return Ok(user);
@@ -57,7 +58,7 @@ namespace Network.API.Controllers
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var dbUser = await _repository.GetUser(id);
+            var dbUser = await _repository.GetUser(id, true);
 
             _mapper.Map(userUpdateDto, dbUser);
 
@@ -78,7 +79,7 @@ namespace Network.API.Controllers
             if (friend != null)
                 return BadRequest("User is already a friend.");
 
-            if (await _repository.GetUser(friendId) == null)
+            if (await _repository.GetUser(friendId, false) == null)
                 return NotFound();
 
             friend = new Friend

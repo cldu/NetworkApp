@@ -40,6 +40,7 @@ namespace Network.API.Data
 
                 foreach (var user in users)
                 {
+                    user.Photos.SingleOrDefault().IsApproved = true;
                     _userManager.CreateAsync(user, "User123").Wait();
                     _userManager.AddToRoleAsync(user, "Member").Wait();
                 }

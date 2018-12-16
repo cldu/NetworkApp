@@ -52,6 +52,8 @@ namespace Network.API.Data
                 .HasForeignKey(f => f.FriendeeId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Photo>().HasQueryFilter(p => p.IsApproved);
+
         }
     }
 }
