@@ -9,7 +9,7 @@ using Network.API.Data;
 namespace Network.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181210160348_Initialize")]
+    [Migration("20181226131959_Initialize")]
     partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

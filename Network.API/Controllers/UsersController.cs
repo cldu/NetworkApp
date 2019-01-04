@@ -25,7 +25,7 @@ namespace Network.API.Controllers
             _repository = repository;
             _mapper = mapper;
         }
-
+        
         [HttpGet]
         public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams)
         {

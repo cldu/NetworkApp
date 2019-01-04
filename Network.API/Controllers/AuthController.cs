@@ -41,8 +41,10 @@ namespace Network.API.Controllers
         public async Task<IActionResult> Register(UserRegisterDto userDto)
         {
             var userToCreate = _mapper.Map<User>(userDto);
-
+            
             var result = await _userManager.CreateAsync(userToCreate, userDto.Password);
+
+            await _userManager.AddToRoleAsync(userToCreate, "Member");
             
             var userToReturn = _mapper.Map<UserDetailsDto>(userToCreate);
 

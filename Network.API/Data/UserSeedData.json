@@ -13,7 +13,7 @@
     "Country": "Taiwan",
     "Photos": [
       {
-        "url": "https://i.redd.it/q6i2gvvfdiv11.jpg",
+        "url": "https://res.cloudinary.com/petsite/image/upload/v1545744251/v6jmktluxwhaqlmcxuj9.jpg",
         "isProfilePhoto": true,
         "description": "Culpa qui incididunt sunt mollit non velit."
       }
@@ -33,7 +33,7 @@
     "Country": "Nepal",
     "Photos": [
       {
-        "url": "https://i.imgur.com/kUDImwa.jpg",
+        "url": "https://res.cloudinary.com/petsite/image/upload/v1545744248/hktmkeqqd9t1sd9fwqzl.jpg",
         "isProfilePhoto": true,
         "description": "Et est anim ullamco eiusmod deserunt elit duis."
       }
@@ -53,7 +53,7 @@
     "Country": "Indonesia",
     "Photos": [
       {
-        "url": "https://i.imgur.com/vwzymK0.jpg",
+        "url": "https://res.cloudinary.com/petsite/image/upload/v1545744239/dhzz8toelsw1ufig8gtr.jpg",
         "isProfilePhoto": true,
         "description": "Tempor et elit ullamco cupidatat velit velit reprehenderit enim labore est deserunt."
       }
@@ -73,7 +73,7 @@
     "Country": "Sudan",
     "Photos": [
       {
-        "url": "https://i.redd.it/xwr89yon9bv11.jpg",
+        "url": "https://res.cloudinary.com/petsite/image/upload/v1545744274/of4e1pcc68we98wcxlat.jpg",
         "isProfilePhoto": true,
         "description": "Elit ullamco elit consequat aliquip ullamco pariatur aliquip reprehenderit consectetur commodo deserunt."
       }
@@ -93,8 +93,8 @@
     "Country": "Romania",
     "Photos": [
       {
-        "url": "https://i.redd.it/mvep8s1i6fv11.jpg",
-        "isMain": true,
+        "url": "https://res.cloudinary.com/petsite/image/upload/v1545744277/uxuu4gdlrnbgai4cq8k8.jpg",
+        "isProfilePhoto": true,
         "description": "Elit nulla ex consectetur in adipisicing non."
       }
     ]
@@ -113,7 +113,7 @@
     "Country": "Solomon Islands",
     "Photos": [
       {
-        "url": "https://images.dog.ceo/breeds/labrador/n02099712_3197.jpg",
+        "url": "https://res.cloudinary.com/petsite/image/upload/v1545743968/xnudjpy4ge4r4cuu5c4w.jpg",
         "isProfilePhoto": true,
         "description": "Dolor quis culpa dolor aute nulla sit enim cillum elit ullamco ut labore et sunt."
       }
@@ -133,7 +133,7 @@
     "Country": "Indonesia",
     "Photos": [
       {
-        "url": "https://images.dog.ceo/breeds/eskimo/n02109961_10021.jpg",
+        "url": "https://res.cloudinary.com/petsite/image/upload/v1545743958/yljsxqwzbghqlm7a2bpc.jpg",
         "isProfilePhoto": true,
         "description": "Sint deserunt magna officia cillum."
       }
@@ -153,7 +153,7 @@
     "Country": "Tanzania",
     "Photos": [
       {
-        "url": "https://images.dog.ceo/breeds/dane-great/n02109047_28433.jpg",
+        "url": "https://res.cloudinary.com/petsite/image/upload/v1545684237/fb1kfhzgj4dpkcufguot.jpg",
         "isProfilePhoto": true,
         "description": "Eu cillum sunt sint ea."
       }
@@ -173,7 +173,7 @@
     "Country": "Serbia",
     "Photos": [
       {
-        "url": "https://images.dog.ceo/breeds/bullterrier-staffordshire/n02093256_6177.jpg",
+        "url": "https://res.cloudinary.com/petsite/image/upload/v1544385054/qicoximlkiuuwxgezpjm.jpg",
         "isProfilePhoto": true,
         "description": "Ad duis sit mollit mollit eu amet in elit nisi adipisicing."
       }
@@ -193,7 +193,7 @@
     "Country": "Argentina",
     "Photos": [
       {
-        "url": "https://images.dog.ceo/breeds/retriever-golden/n02099601_864.jpg",
+        "url": "https://res.cloudinary.com/petsite/image/upload/v1545743970/nuimvavkpm3ksk9ei3uh.jpg",
         "isProfilePhoto": true,
         "description": "Laborum mollit elit adipisicing ea cupidatat nostrud in."
       }

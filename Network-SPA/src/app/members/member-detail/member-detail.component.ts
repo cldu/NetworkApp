@@ -5,6 +5,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 import { TypeaheadOptions } from 'ngx-bootstrap';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-member-detail',
@@ -16,7 +17,8 @@ export class MemberDetailComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
-  constructor(private userService: UserService, private alertify: AlertifyService, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private alertify: AlertifyService, private route: ActivatedRoute, 
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -30,7 +32,7 @@ export class MemberDetailComponent implements OnInit {
         imagePercent: 100,
         thumbnailsColumns: 4,
         imageAnimation: NgxGalleryAnimation.Slide,
-        preview: false
+        preview: true
       }
     ];
 
@@ -49,6 +51,14 @@ export class MemberDetailComponent implements OnInit {
       });
     }
     return imageUrls;
+  }
+
+  beFriend(friendId: number) {
+    this.userService.beFriend(this.authService.decodedToken.nameid, friendId).subscribe( () => {
+      this.alertify.success('You added ' + this.user.nickname + ' as your friend!');
+    }, error => {
+      this.alertify.error(error);
+    });
   }
 
 }
