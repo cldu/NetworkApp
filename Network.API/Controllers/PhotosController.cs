@@ -73,7 +73,7 @@ namespace Network.API.Controllers
                 }
             }
 
-            photoCreationDto.Url = uploadResult.Uri.ToString();
+            photoCreationDto.Url = uploadResult.SecureUri.ToString();
             photoCreationDto.PublicId = uploadResult.PublicId;
 
             var photo = _mapper.Map<Photo>(photoCreationDto);
